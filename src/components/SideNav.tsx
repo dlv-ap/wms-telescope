@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 /**
  * Side Navigation - Expandable JARVIS-style
@@ -9,15 +10,17 @@ import { useState } from 'react'
  */
 
 const navItems = [
-  { icon: 'menu', label: 'Menu' },
-  { icon: 'warehouse', label: 'Warehouse' },
-  { icon: 'local_shipping', label: 'Shipments' },
-  { icon: 'save_alt', label: 'Reports' },
-  { icon: 'help_outline', label: 'Help' },
+  { icon: 'menu', label: 'Menu', path: '/' },
+  { icon: 'warehouse', label: 'Inventory', path: '/inventory' },
+  { icon: 'local_shipping', label: 'Shipments', path: '/' },
+  { icon: 'save_alt', label: 'Reports', path: '/' },
+  { icon: 'help_outline', label: 'Help', path: '/' },
 ]
 
 export default function SideNav() {
   const [expanded, setExpanded] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   return (
     <nav
@@ -43,7 +46,14 @@ export default function SideNav() {
       {/* Nav Items */}
       <div className="flex flex-col gap-1 flex-1 w-full">
         {navItems.map((item, i) => (
-          <NavCell key={i} icon={item.icon} label={item.label} active={i === 0} expanded={expanded} />
+          <NavCell
+            key={i}
+            icon={item.icon}
+            label={item.label}
+            active={location.pathname === item.path}
+            expanded={expanded}
+            onClick={() => navigate(item.path)}
+          />
         ))}
       </div>
 
@@ -67,9 +77,10 @@ export default function SideNav() {
   )
 }
 
-function NavCell({ icon, label, active = false, expanded }: { icon: string; label: string; active?: boolean; expanded: boolean }) {
+function NavCell({ icon, label, active = false, expanded, onClick }: { icon: string; label: string; active?: boolean; expanded: boolean; onClick?: () => void }) {
   return (
     <button
+      onClick={onClick}
       className={`w-full h-10 rounded-lg flex items-center gap-3 px-[6px] cursor-pointer transition-colors border-none outline-none
         ${active ? 'bg-white shadow-sm' : 'bg-transparent hover:bg-white/60'}`}
     >
