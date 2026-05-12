@@ -14,6 +14,11 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-5">
+      {/* Page Title */}
+      <h1 className="font-heading text-[18px] leading-[24px] font-bold uppercase text-[#111111]">
+        My Dashboard
+      </h1>
+
       <ToolbarRow activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="w-full h-px bg-border-default" />
 

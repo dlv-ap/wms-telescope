@@ -1,10 +1,24 @@
+/**
+ * Middle Column - matches Figma nodes:
+ *   919:26642 - OUTBOUND - SLA section
+ *   919:26685 - WAREHOUSE OPERATIONS section
+ *   919:26728 - NEED HELP? section
+ *
+ * SLA Card: white bg, border #e6e6e6, rounded 6px, padding 20px
+ * Values: Noto Sans 20px/26px SemiBold, color #1f222e (or #b71132 for red)
+ * Labels: Noto Sans 12px/16px SemiBold, color #111111
+ * Info icon: 12px, color #1d7dd1
+ * Dividers: 1px vertical, color #e6e6e6
+ */
+import InfoIcon from '../ui/InfoIcon'
+
 export default function MiddleColumn() {
   return (
     <div className="flex-1 flex flex-col gap-6">
       {/* Outbound SLA */}
       <section className="flex flex-col gap-3">
         <div className="flex items-center gap-2.5">
-          <span className="font-sans text-16 font-bold text-text-heading">OUTBOUND - SLA</span>
+          <span className="font-sans text-[16px] leading-[24px] font-bold text-[#111111]">OUTBOUND - SLA</span>
           <span className="material-icons-outlined text-[20px] text-text-primary">keyboard_arrow_right</span>
         </div>
         <SLACard items={[
@@ -17,7 +31,7 @@ export default function MiddleColumn() {
       {/* Warehouse Operations */}
       <section className="flex flex-col gap-3">
         <div className="flex items-center gap-2.5">
-          <span className="font-sans text-16 font-bold text-text-heading">WAREHOUSE OPERATIONS</span>
+          <span className="font-sans text-[16px] leading-[24px] font-bold text-[#111111]">WAREHOUSE OPERATIONS</span>
           <span className="material-icons-outlined text-[20px] text-text-primary">keyboard_arrow_right</span>
         </div>
         <SLACard items={[
@@ -29,8 +43,8 @@ export default function MiddleColumn() {
 
       {/* Need Help */}
       <section className="flex flex-col gap-3">
-        <span className="font-sans text-16 font-bold text-text-heading">NEED HELP?</span>
-        <div className="bg-surface-white border border-border-default rounded-md p-4 flex flex-col gap-4">
+        <span className="font-sans text-[16px] leading-[24px] font-bold text-[#111111]">NEED HELP?</span>
+        <div className="bg-surface-white border border-border-default rounded-md p-4 flex flex-col gap-[15px]">
           <HelpItem text="List >48h in-transit shipments" />
           <div className="h-px bg-border-default" />
           <HelpItem text="Give me a CSV of all breached shipments for last week" />
@@ -42,34 +56,40 @@ export default function MiddleColumn() {
   )
 }
 
-import InfoIcon from '../ui/InfoIcon'
-
+/**
+ * SLA Card - white bg, border 1px #e6e6e6, rounded 6px, padding 20px
+ * 3 items separated by vertical dividers
+ */
 function SLACard({ items }: { items: { value: string; label: string; isRed: boolean; tooltip: string }[] }) {
   return (
-    <div className="flex bg-surface-white border border-border-default rounded-md p-5 gap-6">
+    <div className="flex bg-surface-white border border-border-default rounded-md p-5">
       {items.map((item, i) => (
-        <div key={i} className="flex items-start gap-6 flex-1">
+        <div key={i} className="flex items-start flex-1">
           <div className="flex flex-col gap-2 flex-1">
-            <span className={`text-20 font-semibold ${item.isRed ? 'text-status-error' : 'text-text-dark'}`}>
+            <span className={`font-sans text-[20px] leading-[26px] font-semibold ${item.isRed ? 'text-[#b71132]' : 'text-[#1f222e]'}`}>
               {item.value}
             </span>
             <div className="flex items-start gap-1">
-              <span className="text-12 font-semibold text-text-heading">{item.label}</span>
+              <span className="font-sans text-[12px] leading-[16px] font-semibold text-[#111111]">{item.label}</span>
               <InfoIcon tooltip={item.tooltip} />
             </div>
           </div>
-          {i < items.length - 1 && <div className="w-px bg-border-default self-stretch" />}
+          {i < items.length - 1 && <div className="w-px bg-border-default self-stretch mx-6" />}
         </div>
       ))}
     </div>
   )
 }
 
+/**
+ * Help Item - Noto Sans 12px/16px Regular, color #111111
+ * Arrow: 20px, color #2b2b2b
+ */
 function HelpItem({ text }: { text: string }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-12 font-normal text-text-heading">{text}</span>
-      <span className="material-icons-outlined text-[20px] text-text-primary">keyboard_arrow_right</span>
+      <span className="font-sans text-[12px] leading-[16px] font-normal text-[#111111]">{text}</span>
+      <span className="material-icons-outlined text-[20px] text-text-primary shrink-0">keyboard_arrow_right</span>
     </div>
   )
 }

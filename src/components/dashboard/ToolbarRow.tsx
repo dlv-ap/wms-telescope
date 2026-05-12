@@ -1,4 +1,12 @@
+/**
+ * Toolbar Row - matches Figma node 892:18518
+ * TDS Components: TabGroup (Type=Button Style, Style=Black, Size=Large, Count=2 Tabs)
+ *                 Badge (Variant=White, Size=Large, Type=Solid)
+ */
 import type { DashboardTab } from '../../pages/DashboardPage'
+import DatePickerDropdown from './DatePickerDropdown'
+import AllFCsDropdown from './AllFCsDropdown'
+import TransportationDropdown from './TransportationDropdown'
 
 interface ToolbarRowProps {
   activeTab: DashboardTab
@@ -8,19 +16,23 @@ interface ToolbarRowProps {
 export default function ToolbarRow({ activeTab, onTabChange }: ToolbarRowProps) {
   return (
     <div className="flex items-center justify-between">
-      {/* Tab Group */}
-      <div className="flex">
+      {/* Tab Group - TDS TabGroup (Type=Button Style, Style=Black, Size=Large) */}
+      <div className="flex gap-0">
         <button
           onClick={() => onTabChange('performance')}
-          className={`px-5 py-2 text-14 font-medium rounded-full transition-colors
-            ${activeTab === 'performance' ? 'bg-btn-dark text-btn-darkText' : 'text-text-primary hover:bg-gray-50'}`}
+          className={`px-5 py-2 font-sans text-[14px] leading-[20px] font-medium rounded-full transition-colors
+            ${activeTab === 'performance'
+              ? 'bg-[#0c0c0c] text-[#f2f2f2]'
+              : 'bg-transparent text-text-primary hover:bg-[#f7f7f7]'}`}
         >
           Performance
         </button>
         <button
           onClick={() => onTabChange('operations')}
-          className={`px-5 py-2 text-14 font-medium rounded-full transition-colors
-            ${activeTab === 'operations' ? 'bg-btn-dark text-btn-darkText' : 'text-text-primary hover:bg-gray-50'}`}
+          className={`px-5 py-2 font-sans text-[14px] leading-[20px] font-medium rounded-full transition-colors
+            ${activeTab === 'operations'
+              ? 'bg-[#0c0c0c] text-[#f2f2f2]'
+              : 'bg-transparent text-text-primary hover:bg-[#f7f7f7]'}`}
         >
           Operations
         </button>
@@ -28,21 +40,10 @@ export default function ToolbarRow({ activeTab, onTabChange }: ToolbarRowProps) 
 
       {/* Badge Chips */}
       <div className="flex items-center gap-4">
-        <BadgeChip icon="calendar_today" label="Today: 10 Dec 2025" hasArrow />
-        <BadgeChip icon="equalizer" label="Compare Facilities" />
-        <BadgeChip icon="widgets" label="All FCs" hasArrow />
-        <BadgeChip icon="commute" label="All Transportation" />
+        <DatePickerDropdown />
+        <AllFCsDropdown />
+        <TransportationDropdown />
       </div>
-    </div>
-  )
-}
-
-function BadgeChip({ icon, label, hasArrow = false }: { icon: string; label: string; hasArrow?: boolean }) {
-  return (
-    <div className="flex items-center px-2 py-1.5 gap-1 bg-surface-white rounded cursor-pointer text-12 font-medium text-text-primary">
-      <span className="material-icons-outlined text-[16px]">{icon}</span>
-      <span>{label}</span>
-      {hasArrow && <span className="material-icons-outlined text-[16px]">keyboard_arrow_down</span>}
     </div>
   )
 }
