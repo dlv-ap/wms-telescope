@@ -39,7 +39,7 @@ const columns = [
   { title: 'Action', key: 'action', render: (_: any, record: any) => (
     <Button
       variant="black"
-      buttonStyle="primary"
+      buttonStyle="secondary"
       size="sm"
       disabled={record.status !== 'Ready'}
       leadingIcon={<span className="material-icons-outlined text-[14px]">download</span>}

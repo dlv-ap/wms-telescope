@@ -30,7 +30,7 @@ const columns = [
   { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="sm" badgeType="subtle" text={text} /> },
   { title: 'Order Date', dataIndex: 'date', key: 'date' },
   { title: 'SLA Date', dataIndex: 'sla', key: 'sla' },
-  { title: 'Actions', key: 'actions', render: () => <Button variant="black" buttonStyle="tertiary" size="sm" buttonType="iconButton"><span className="material-icons-outlined text-[18px]">more_vert</span></Button> },
+  { title: 'Actions', key: 'actions', render: () => <Button variant="black" buttonStyle="secondary" size="sm" buttonType="iconButton"><span className="material-icons-outlined text-[18px]">more_vert</span></Button> },
 ]
 
 const statusTabs: { label: string; value: OrderStatus; count: number }[] = [
@@ -85,9 +85,9 @@ export default function OutboundPage() {
             onClick={() => setActiveStatus(tab.value)}
             badge={
               <Badge
-                variant={activeStatus === tab.value ? 'white' : 'black'}
+                variant={activeStatus === tab.value ? 'white' : 'coal'}
                 size="sm"
-                badgeType="solid"
+                badgeType="subtle"
                 text={String(tab.count)}
                 className="ml-1 align-middle"
               />
