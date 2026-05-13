@@ -39,13 +39,12 @@ const columns = [
   { title: 'Action', key: 'action', render: (_: any, record: any) => (
     <Button
       variant="black"
-      buttonStyle="tertiary"
+      buttonStyle="secondary"
       size="sm"
       buttonType="iconButton"
       disabled={record.status !== 'Ready'}
-    >
-      <span className="material-icons-outlined text-[18px]">download</span>
-    </Button>
+      leadingIcon={<span className="material-icons-outlined text-[16px]">download</span>}
+    />
   )},
 ]
 
