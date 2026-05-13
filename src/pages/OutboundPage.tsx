@@ -26,8 +26,8 @@ const columns = [
   { title: 'Order ID', dataIndex: 'id', key: 'id', render: (text: string) => <span className="font-semibold text-[#5b80f7]">{text}</span> },
   { title: 'Customer', dataIndex: 'customer', key: 'customer' },
   { title: 'Items', dataIndex: 'items', key: 'items' },
-  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="white" size="sm" badgeType="subtle" text={text} /> },
-  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="sm" badgeType="subtle" text={text} /> },
+  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="white" size="sm" badgeType="outlined" text={text} /> },
+  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="sm" badgeType="outlined" text={text} /> },
   { title: 'Order Date', dataIndex: 'date', key: 'date' },
   { title: 'SLA Date', dataIndex: 'sla', key: 'sla' },
   { title: 'Actions', key: 'actions', render: () => <Button variant="black" buttonStyle="secondary" size="sm" buttonType="iconButton"><span className="material-icons-outlined text-[18px]">more_vert</span></Button> },
@@ -87,7 +87,7 @@ export default function OutboundPage() {
               <Badge
                 variant={activeStatus === tab.value ? 'white' : 'coal'}
                 size="sm"
-                badgeType="subtle"
+                badgeType="outlined"
                 text={String(tab.count)}
                 className="ml-1 align-middle"
               />

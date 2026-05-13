@@ -31,11 +31,11 @@ const typeVariant: Record<string, string> = {
 
 const columns = [
   { title: 'Report Name', dataIndex: 'name', key: 'name', render: (text: string) => <span className="font-medium text-[#111111]">{text}</span> },
-  { title: 'Type', dataIndex: 'type', key: 'type', render: (text: string) => <Badge variant={typeVariant[text] as any || 'coal'} size="sm" badgeType="subtle" text={text} /> },
+  { title: 'Type', dataIndex: 'type', key: 'type', render: (text: string) => <Badge variant={typeVariant[text] as any || 'coal'} size="sm" badgeType="outlined" text={text} /> },
   { title: 'Frequency', dataIndex: 'frequency', key: 'frequency' },
   { title: 'Last Generated', dataIndex: 'lastGenerated', key: 'lastGenerated' },
   { title: 'Size', dataIndex: 'size', key: 'size' },
-  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={text === 'Ready' ? 'success' : 'warning'} size="sm" badgeType="subtle" text={text} /> },
+  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={text === 'Ready' ? 'success' : 'warning'} size="sm" badgeType="outlined" text={text} /> },
   { title: 'Action', key: 'action', render: (_: any, record: any) => (
     <Button
       variant="black"
