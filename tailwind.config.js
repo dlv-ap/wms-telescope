@@ -5,8 +5,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['"Noto Sans"', 'sans-serif'],
-        heading: ['"IBM Plex Sans"', 'sans-serif'],
-        inter: ['"Inter"', 'sans-serif'],
+        heading: ['"Noto Sans"', 'sans-serif'],
+        inter: ['"Noto Sans"', 'sans-serif'],
       },
       colors: {
         surface: { bg: '#f7f7f7', white: '#ffffff' },

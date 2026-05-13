@@ -45,8 +45,8 @@ export default function OutboundPage() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
-          <h1 className="font-inter text-[20px] leading-[24px] font-bold text-[#1e222d]">Shipments</h1>
-          <p className="font-inter text-[14px] leading-[24px] font-normal text-[#1e222d]">
+          <h1 className="font-sans text-[20px] leading-[24px] font-bold text-[#1e222d]">Shipments</h1>
+          <p className="font-sans text-[14px] leading-[24px] font-normal text-[#1e222d]">
             Manage outbound orders, picking, packing and dispatch
           </p>
         </div>
@@ -102,22 +102,22 @@ export default function OutboundPage() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-[#f5f6f8]">
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Order ID</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Customer</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Items</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Facility</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Status</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Order Date</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">SLA Date</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Actions</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Order ID</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Customer</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Items</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Facility</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Status</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Order Date</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">SLA Date</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Actions</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((order, i) => (
               <tr key={i} className="border-t border-[#e0e2ea] hover:bg-[#f9fafb] transition-colors">
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-semibold text-[#5b80f7]">{order.id}</td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#111111]">{order.customer}</td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{order.items}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-semibold text-[#5b80f7]">{order.id}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#111111]">{order.customer}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.items}</td>
                 <td className="px-4 py-4">
                   <span className="px-2.5 py-0.5 bg-[#f7f7f7] rounded-[10px] font-sans text-[12px] leading-[16px] font-medium text-[#111111]">
                     {order.facility}
@@ -128,8 +128,8 @@ export default function OutboundPage() {
                     {order.status}
                   </span>
                 </td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{order.date}</td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{order.sla}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.date}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.sla}</td>
                 <td className="px-4 py-4">
                   <button className="w-8 h-8 flex items-center justify-center rounded hover:bg-[#f3f4f6] transition-colors">
                     <span className="material-icons-outlined text-[18px] text-[#6b7280]">more_vert</span>

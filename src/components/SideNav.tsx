@@ -14,7 +14,6 @@ const navItems = [
   { icon: 'warehouse', label: 'Inventory', path: '/inventory' },
   { icon: 'local_shipping', label: 'Shipments', path: '/outbound' },
   { icon: 'save_alt', label: 'Reports', path: '/reports' },
-  { icon: 'help_outline', label: 'Help', path: '/' },
 ]
 
 export default function SideNav() {
@@ -37,7 +36,7 @@ export default function SideNav() {
           </svg>
         </div>
         {expanded && (
-          <span className="font-heading text-[14px] font-bold text-[#111111] whitespace-nowrap">
+          <span className="font-sans text-[14px] font-bold text-[#111111] whitespace-nowrap">
             TELESCOPE
           </span>
         )}

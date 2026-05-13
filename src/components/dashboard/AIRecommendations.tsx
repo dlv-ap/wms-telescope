@@ -48,7 +48,7 @@ export default function AIRecommendations() {
     <div className="flex flex-col gap-[15px] p-4 rounded-lg" style={{ background: 'linear-gradient(135deg, #fdf2f8 0%, #ede9fe 50%, #eef2ff 100%)' }}>
       {/* Header row */}
       <div className="flex items-center gap-1.5">
-        <span className="font-inter text-[12px] leading-[16px] font-bold tracking-[0.3px] text-[#111111] capitalize">
+        <span className="font-sans text-[12px] leading-[16px] font-bold tracking-[0.3px] text-[#111111] capitalize">
           AI Recommendations: Performance
         </span>
       </div>
@@ -73,7 +73,7 @@ export default function AIRecommendations() {
 
             {/* Text content */}
             <div className="flex flex-col gap-1 flex-1">
-              <p className="font-inter text-[12px] leading-[18px] font-normal tracking-[0.3px] text-[#111111]">
+              <p className="font-sans text-[12px] leading-[18px] font-normal tracking-[0.3px] text-[#111111]">
                 {rec.title}
                 <br />
                 {rec.subtitle}

@@ -25,8 +25,8 @@ export default function InventoryPage() {
     <div className="flex flex-col gap-5">
       {/* Page Header */}
       <div className="flex flex-col gap-1">
-        <h1 className="font-inter text-[20px] leading-[24px] font-bold text-[#1e222d]">Inventory</h1>
-        <p className="font-inter text-[14px] leading-[24px] font-normal text-[#1e222d]">
+        <h1 className="font-sans text-[20px] leading-[24px] font-bold text-[#1e222d]">Inventory</h1>
+        <p className="font-sans text-[14px] leading-[24px] font-normal text-[#1e222d]">
           View and manage your warehouse inventory across all facilities
         </p>
       </div>
@@ -82,7 +82,7 @@ export default function InventoryPage() {
 
       {/* Results */}
       <div className="bg-white rounded-lg p-6 flex flex-col gap-4">
-        <span className="font-inter text-[14px] leading-[24px] font-normal text-[#1e222d]">
+        <span className="font-sans text-[14px] leading-[24px] font-normal text-[#1e222d]">
           Shows {filtered.length} Result{filtered.length !== 1 ? 's' : ''}
         </span>
 
@@ -91,26 +91,26 @@ export default function InventoryPage() {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-[#f5f6f8]">
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Product SKU</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Product Name</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Total</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Sellable</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Damaged</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Expired</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Processing</th>
-                <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Facility</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Product SKU</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Product Name</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Total</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Sellable</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Damaged</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Expired</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Processing</th>
+                <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px] border-b border-[#e0e2ea]">Facility</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((item, i) => (
                 <tr key={i} className="border-b border-[#e0e2ea] hover:bg-[#f9fafb] transition-colors">
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-semibold text-[#5b80f7]">{item.sku}</td>
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{item.name}</td>
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{item.total}</td>
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-medium text-[#1ba86e]">{item.sellable}</td>
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-medium text-[#cf9f02]">{item.damaged}</td>
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-medium text-[#dc143c]">{item.expired}</td>
-                  <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{item.processing}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-semibold text-[#5b80f7]">{item.sku}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{item.name}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{item.total}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-medium text-[#1ba86e]">{item.sellable}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-medium text-[#cf9f02]">{item.damaged}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-medium text-[#dc143c]">{item.expired}</td>
+                  <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{item.processing}</td>
                   <td className="px-4 py-4">
                     <span className="px-2.5 py-0.5 bg-[#f7f7f7] rounded-[10px] font-sans text-[12px] leading-[16px] font-medium text-[#111111]">
                       {item.facility}

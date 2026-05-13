@@ -23,8 +23,8 @@ export default function ReportsPage() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
-          <h1 className="font-inter text-[20px] leading-[24px] font-bold text-[#1e222d]">Reports</h1>
-          <p className="font-inter text-[14px] leading-[24px] font-normal text-[#1e222d]">
+          <h1 className="font-sans text-[20px] leading-[24px] font-bold text-[#1e222d]">Reports</h1>
+          <p className="font-sans text-[14px] leading-[24px] font-normal text-[#1e222d]">
             Download and schedule automated reports for your operations
           </p>
         </div>
@@ -55,27 +55,27 @@ export default function ReportsPage() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-[#f5f6f8]">
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Report Name</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Type</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Frequency</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Last Generated</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Size</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Status</th>
-              <th className="text-left px-4 py-3 font-inter text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Action</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Report Name</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Type</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Frequency</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Last Generated</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Size</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Status</th>
+              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Action</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((report, i) => (
               <tr key={i} className="border-t border-[#e0e2ea] hover:bg-[#f9fafb] transition-colors">
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-medium text-[#111111]">{report.name}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-medium text-[#111111]">{report.name}</td>
                 <td className="px-4 py-4">
                   <span className="px-2.5 py-0.5 bg-[#f7f7f7] rounded-[10px] font-sans text-[12px] leading-[16px] font-medium text-[#111111]">
                     {report.type}
                   </span>
                 </td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{report.frequency}</td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{report.lastGenerated}</td>
-                <td className="px-4 py-4 font-inter text-[14px] leading-[20px] font-normal text-[#666666]">{report.size}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{report.frequency}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{report.lastGenerated}</td>
+                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{report.size}</td>
                 <td className="px-4 py-4">
                   <span className={`px-2.5 py-1 rounded-[10px] font-sans text-[12px] leading-[16px] font-medium
                     ${report.status === 'Ready' ? 'bg-[#ecfdf5] text-[#059669]' : 'bg-[#fff6ea] text-[#cf9f02]'}`}>

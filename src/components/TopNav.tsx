@@ -10,7 +10,7 @@ export default function TopNav() {
     <header className="h-[56px] bg-[#f7f7f7] flex items-center px-5 gap-4 shrink-0">
       {/* Left: Logo text + divider + breadcrumb */}
       <div className="flex items-center gap-4">
-        <span className="font-heading text-[16px] leading-[20px] font-bold text-[#111111] tracking-tight">TELESCOPE</span>
+        <span className="font-sans text-[16px] leading-[20px] font-bold text-[#111111] tracking-tight">TELESCOPE</span>
         <div className="w-px h-5 bg-[#d1d5db]" />
         <div className="flex items-center gap-1.5">
           <span className="font-sans text-[13px] leading-[16px] font-normal text-[#6b7280] cursor-pointer hover:text-[#2b2b2b]">Dashboard</span>
