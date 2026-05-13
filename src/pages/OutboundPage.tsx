@@ -26,8 +26,8 @@ const columns = [
   { title: 'Order ID', dataIndex: 'id', key: 'id', render: (text: string) => <span className="font-semibold text-[#5b80f7]">{text}</span> },
   { title: 'Customer', dataIndex: 'customer', key: 'customer' },
   { title: 'Items', dataIndex: 'items', key: 'items' },
-  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="white" size="sm" badgeType="outlined" text={text} /> },
-  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="sm" badgeType="outlined" text={text} /> },
+  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="white" size="md" badgeType="subtle" text={text} /> },
+  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="md" badgeType="subtle" text={text} /> },
   { title: 'Order Date', dataIndex: 'date', key: 'date' },
   { title: 'SLA Date', dataIndex: 'sla', key: 'sla' },
   { title: 'Actions', key: 'actions', render: () => <Button variant="black" buttonStyle="secondary" size="sm" buttonType="iconButton"><span className="material-icons-outlined text-[18px]">more_vert</span></Button> },
@@ -83,14 +83,10 @@ export default function OutboundPage() {
             title={tab.label}
             isSelected={activeStatus === tab.value}
             onClick={() => setActiveStatus(tab.value)}
-            badge={
-              <Badge
-                variant={activeStatus === tab.value ? 'white' : 'coal'}
-                size="sm"
-                badgeType="outlined"
-                text={String(tab.count)}
-                className="ml-1 align-middle"
-              />
+            pill={
+              <span className={`inline-flex items-center justify-center px-2 h-5 rounded-full text-[11px] font-semibold leading-none ${activeStatus === tab.value ? 'bg-white/20 text-white' : 'bg-[#f3f4f6] text-[#2b2b2b]'}`}>
+                {tab.count}
+              </span>
             }
           />
         ))}

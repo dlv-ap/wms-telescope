@@ -20,7 +20,7 @@ const columns = [
   { title: 'Damaged', dataIndex: 'damaged', key: 'damaged', render: (text: string) => <span className="font-medium text-[#cf9f02]">{text}</span> },
   { title: 'Expired', dataIndex: 'expired', key: 'expired', render: (text: string) => <span className="font-medium text-[#dc143c]">{text}</span> },
   { title: 'Processing', dataIndex: 'processing', key: 'processing' },
-  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="success" size="sm" badgeType="outlined" text={text} /> },
+  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="success" size="md" badgeType="subtle" text={text} /> },
 ]
 
 export default function InventoryPage() {
