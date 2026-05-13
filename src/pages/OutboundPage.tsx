@@ -3,6 +3,14 @@ import { TabGroup, TabCell, Badge, Button, Input, Table } from '@delhivery/tarma
 
 type OrderStatus = 'all' | 'pending' | 'picked' | 'packed' | 'shipped' | 'cancelled'
 
+const statusBadgeVariant: Record<string, string> = {
+  Pending: 'warning',
+  Picked: 'success',
+  Packed: 'info',
+  Shipped: 'success',
+  Cancelled: 'error',
+}
+
 const orders = [
   { key: '1', id: 'ORD-2025-001', customer: 'Havells India', items: 12, facility: 'DELFC1', status: 'Pending', date: '12 May 2026', sla: '14 May 2026' },
   { key: '2', id: 'ORD-2025-002', customer: 'Voltas Ltd', items: 5, facility: 'AMDFC1', status: 'Picked', date: '12 May 2026', sla: '13 May 2026' },
@@ -19,7 +27,7 @@ const columns = [
   { title: 'Customer', dataIndex: 'customer', key: 'customer' },
   { title: 'Items', dataIndex: 'items', key: 'items' },
   { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="white" size="md" badgeType="subtle" text={text} /> },
-  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant="white" size="md" badgeType="subtle" text={text} /> },
+  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="md" badgeType="subtle" text={text} /> },
   { title: 'Order Date', dataIndex: 'date', key: 'date' },
   { title: 'SLA Date', dataIndex: 'sla', key: 'sla' },
   { title: 'Actions', key: 'actions', render: () => <Button variant="black" buttonStyle="secondary" size="sm" buttonType="iconButton"><span className="material-icons-outlined text-[18px]">more_vert</span></Button> },
