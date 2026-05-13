@@ -41,10 +41,10 @@ const columns = [
       variant="black"
       buttonStyle="secondary"
       size="sm"
+      buttonType="iconButton"
       disabled={record.status !== 'Ready'}
-      leadingIcon={<span className="material-icons-outlined text-[14px]">download</span>}
     >
-      Download
+      <span className="material-icons-outlined text-[18px]">download</span>
     </Button>
   )},
 ]
