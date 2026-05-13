@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Badge } from '@delhivery/tarmac'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Message { role: 'user' | 'assistant'; content: string }
+interface ChatSession { id: string; title: string; messages: Message[]; timestamp: string }
 interface ResultData {
   title: string
   metric?: { label: string; value: string; trend?: string }
@@ -27,6 +28,14 @@ const popularQueries = [
   'What is the average time from order creation to packed?',
   'What is the trend of cancellations in the last week?',
   'Show top 10 SKUs by order volume this month',
+  'Which routes have the highest delivery success rate?',
+  'What is the average delivery time by warehouse?',
+]
+
+const mockHistory: ChatSession[] = [
+  { id: '1', title: 'Stagnant orders analysis', messages: [{ role: 'user', content: 'How many orders are in same status more than 24 hours?' }, { role: 'assistant', content: '142 orders have been in the same status for more than 24 hours.' }], timestamp: '2 hours ago' },
+  { id: '2', title: 'Weekly volume comparison', messages: [{ role: 'user', content: 'How does this week compare to last?' }, { role: 'assistant', content: 'This week: 2,981 vs Previous: 4,200 (-29%)' }], timestamp: 'Yesterday' },
+  { id: '3', title: 'Cancellation trends', messages: [{ role: 'user', content: 'What is the trend of cancellations?' }, { role: 'assistant', content: 'Cancellations increased 12% vs previous week. Total: 89.' }], timestamp: '2 days ago' },
 ]
 
 const mockResults: Record<string, ResultData> = {
@@ -82,11 +91,27 @@ export default function AIDashboardPage() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [currentResult, setCurrentResult] = useState<ResultData | null>(null)
+  const [showHistory, setShowHistory] = useState(false)
+  const [showQueries, setShowQueries] = useState(false)
+  const [chatHistory, setChatHistory] = useState<ChatSession[]>(mockHistory)
+  const queriesRef = useRef<HTMLDivElement>(null)
+  const historyRef = useRef<HTMLDivElement>(null)
+
+  // Close popovers on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (queriesRef.current && !queriesRef.current.contains(e.target as Node)) setShowQueries(false)
+      if (historyRef.current && !historyRef.current.contains(e.target as Node)) setShowHistory(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
   const handleSend = (query: string) => {
     if (!query.trim()) return
     setMessages(prev => [...prev, { role: 'user', content: query }])
     setInput('')
+    setShowQueries(false)
     setIsLoading(true)
     setTimeout(() => {
       const result = mockResults[query] || { title: 'Query Results', summary: `Analyzing: "${query}"...`, notes: ['Period: Last 7 days'], insights: ['Try a more specific query'] }
@@ -94,6 +119,24 @@ export default function AIDashboardPage() {
       setCurrentResult(result)
       setIsLoading(false)
     }, 1200)
+  }
+
+  const handleNewChat = () => {
+    if (messages.length > 0) {
+      const newSession: ChatSession = { id: Date.now().toString(), title: messages[0].content.slice(0, 40) + '...', messages: [...messages], timestamp: 'Just now' }
+      setChatHistory(prev => [newSession, ...prev])
+    }
+    setMessages([])
+    setCurrentResult(null)
+  }
+
+  const loadHistory = (session: ChatSession) => {
+    if (messages.length > 0) {
+      const newSession: ChatSession = { id: Date.now().toString(), title: messages[0].content.slice(0, 40) + '...', messages: [...messages], timestamp: 'Just now' }
+      setChatHistory(prev => [newSession, ...prev])
+    }
+    setMessages(session.messages)
+    setShowHistory(false)
   }
 
   return (
@@ -107,7 +150,26 @@ export default function AIDashboardPage() {
             </div>
             <span className="font-sans text-[12px] font-semibold">Godam Assistant</span>
           </div>
-          <button className="text-[10px] text-white/70 border border-white/30 px-2 py-0.5 rounded hover:bg-white/10">+ New</button>
+          <div className="flex items-center gap-2">
+            {/* History icon */}
+            <div className="relative" ref={historyRef}>
+              <button onClick={() => setShowHistory(!showHistory)} className="w-6 h-6 rounded flex items-center justify-center hover:bg-white/10">
+                <span className="material-icons-outlined text-[16px] text-white/70">history</span>
+              </button>
+              {showHistory && (
+                <div className="absolute top-8 right-0 w-[240px] bg-white border border-[#e6e6e6] rounded-lg shadow-lg z-50 py-1 max-h-[300px] overflow-y-auto">
+                  <span className="font-sans text-[9px] text-[#9ca3af] uppercase font-semibold px-3 py-1.5 block">Chat History</span>
+                  {chatHistory.map(session => (
+                    <button key={session.id} onClick={() => loadHistory(session)} className="w-full text-left px-3 py-2 hover:bg-[#f7f7f7] transition-colors border-b border-[#f3f4f6] last:border-0">
+                      <span className="font-sans text-[11px] text-[#2b2b2b] block truncate">{session.title}</span>
+                      <span className="font-sans text-[9px] text-[#9ca3af]">{session.timestamp}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <button onClick={handleNewChat} className="text-[10px] text-white/70 border border-white/30 px-2 py-0.5 rounded hover:bg-white/10">+ New</button>
+          </div>
         </div>
 
         {/* Context Alerts */}
@@ -153,19 +215,21 @@ export default function AIDashboardPage() {
         <div className="px-3 py-2 border-t border-[#e6e6e6] shrink-0">
           <div className="flex items-center h-9 px-3 bg-[#f7f7f7] border border-[#e6e6e6] rounded-full gap-2">
             <input type="text" placeholder="Ask anything..." value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSend(input)} className="flex-1 border-none outline-none bg-transparent font-sans text-[11px] text-[#111] placeholder:text-[#9ca3af]" />
-            {/* Popular queries popover */}
-            <div className="relative group">
-              <button className="w-5 h-5 rounded-full bg-white border border-[#e6e6e6] flex items-center justify-center hover:bg-[#f3f4f6]">
-                <span className="material-icons-outlined text-[12px] text-[#6b7280]">lightbulb</span>
+            {/* Popular queries - click to toggle */}
+            <div className="relative" ref={queriesRef}>
+              <button onClick={() => setShowQueries(!showQueries)} className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${showQueries ? 'bg-[#1e222d] border-[#1e222d]' : 'bg-white border-[#e6e6e6] hover:bg-[#f3f4f6]'}`}>
+                <span className={`material-icons-outlined text-[12px] ${showQueries ? 'text-white' : 'text-[#6b7280]'}`}>lightbulb</span>
               </button>
-              <div className="hidden group-hover:flex absolute bottom-7 right-0 w-[280px] bg-white border border-[#e6e6e6] rounded-lg shadow-lg p-2 flex-col gap-1 z-50">
-                <span className="font-sans text-[9px] text-[#9ca3af] uppercase font-semibold px-2 py-1">Suggested Queries</span>
-                {popularQueries.slice(0, 5).map((q, i) => (
-                  <button key={i} onClick={() => handleSend(q)} className="text-left px-2 py-1.5 rounded font-sans text-[10px] text-[#4b5563] hover:bg-[#f7f7f7] transition-colors leading-[14px]">
-                    {q}
-                  </button>
-                ))}
-              </div>
+              {showQueries && (
+                <div className="absolute bottom-7 right-0 w-[280px] bg-white border border-[#e6e6e6] rounded-lg shadow-lg p-2 flex flex-col gap-1 z-50">
+                  <span className="font-sans text-[9px] text-[#9ca3af] uppercase font-semibold px-2 py-1">Suggested Queries</span>
+                  {popularQueries.map((q, i) => (
+                    <button key={i} onClick={() => handleSend(q)} className="text-left px-2 py-1.5 rounded font-sans text-[10px] text-[#4b5563] hover:bg-[#f7f7f7] transition-colors leading-[14px]">
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             <button onClick={() => handleSend(input)} className="w-5 h-5 rounded-full bg-[#1e222d] flex items-center justify-center">
               <span className="material-icons-outlined text-[12px] text-white">arrow_upward</span>
