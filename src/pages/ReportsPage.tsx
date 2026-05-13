@@ -44,6 +44,8 @@ const columns = [
       buttonType="iconButton"
       disabled={record.status !== 'Ready'}
       leadingIcon={<span className="material-icons-outlined text-[16px]">download</span>}
+      borderColor="#2b2b2b"
+      textColor="#2b2b2b"
     />
   )},
 ]

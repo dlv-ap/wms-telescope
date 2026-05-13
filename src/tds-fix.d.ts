@@ -60,6 +60,10 @@ declare module '@delhivery/tarmac' {
     onClick?: (e: any) => void
     children?: React.ReactNode
     text?: string
+    borderColor?: string
+    textColor?: string
+    backgroundColor?: string
+    hoverColor?: string
   }>
   
   export const Input: React.FC<{
