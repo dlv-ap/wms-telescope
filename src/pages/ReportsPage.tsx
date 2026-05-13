@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Badge, Button } from '@delhivery/tarmac'
 
 const reports = [
   { id: 'RPT-001', name: 'Daily Shipment Summary', type: 'Outbound', frequency: 'Daily', lastGenerated: '12 May 2026, 6:00 AM', status: 'Ready', size: '2.4 MB' },
@@ -28,10 +29,14 @@ export default function ReportsPage() {
             Download and schedule automated reports for your operations
           </p>
         </div>
-        <button className="h-12 px-5 bg-[#000000] text-white rounded-md flex items-center gap-2 font-sans text-[14px] font-medium cursor-pointer hover:bg-[#222] transition-colors">
-          <span className="material-icons-outlined text-[18px]">add</span>
+        <Button
+          variant="black"
+          buttonStyle="primary"
+          size="lg"
+          leadingIcon={<span className="material-icons-outlined text-[18px]">add</span>}
+        >
           Schedule Report
-        </button>
+        </Button>
       </div>
 
       {/* Filter Tabs */}
@@ -69,30 +74,24 @@ export default function ReportsPage() {
               <tr key={i} className="border-t border-[#e0e2ea] hover:bg-[#f9fafb] transition-colors">
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-medium text-[#111111]">{report.name}</td>
                 <td className="px-4 py-4">
-                  <span className="px-2.5 py-0.5 bg-[#f7f7f7] rounded-[10px] font-sans text-[12px] leading-[16px] font-medium text-[#111111]">
-                    {report.type}
-                  </span>
+                  <Badge variant={report.type === 'Outbound' ? 'info' : report.type === 'Inventory' ? 'success' : report.type === 'Performance' ? 'warning' : 'coal'} size="sm" badgeType="subtle" text={report.type} />
                 </td>
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{report.frequency}</td>
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{report.lastGenerated}</td>
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{report.size}</td>
                 <td className="px-4 py-4">
-                  <span className={`px-2.5 py-1 rounded-[10px] font-sans text-[12px] leading-[16px] font-medium
-                    ${report.status === 'Ready' ? 'bg-[#ecfdf5] text-[#059669]' : 'bg-[#fff6ea] text-[#cf9f02]'}`}>
-                    {report.status}
-                  </span>
+                  <Badge variant={report.status === 'Ready' ? 'success' : 'warning'} size="sm" badgeType="subtle" text={report.status} />
                 </td>
                 <td className="px-4 py-4">
-                  <button
+                  <Button
+                    variant="black"
+                    buttonStyle="primary"
+                    size="sm"
                     disabled={report.status !== 'Ready'}
-                    className={`h-8 px-3 rounded-md flex items-center gap-1.5 font-sans text-[12px] font-medium transition-colors
-                      ${report.status === 'Ready'
-                        ? 'bg-[#111111] text-white hover:bg-[#333] cursor-pointer'
-                        : 'bg-[#e6e6e6] text-[#9ca3af] cursor-not-allowed'}`}
+                    leadingIcon={<span className="material-icons-outlined text-[14px]">download</span>}
                   >
-                    <span className="material-icons-outlined text-[14px]">download</span>
                     Download
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}

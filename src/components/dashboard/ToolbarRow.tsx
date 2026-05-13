@@ -1,8 +1,7 @@
 /**
- * Toolbar Row - matches Figma node 892:18518
- * TDS Components: TabGroup (Type=Button Style, Style=Black, Size=Large, Count=2 Tabs)
- *                 Badge (Variant=White, Size=Large, Type=Solid)
+ * Toolbar Row - uses TDS TabGroup + TabCell + Badge
  */
+import { TabGroup, TabCell } from '@delhivery/tarmac'
 import type { DashboardTab } from '../../pages/DashboardPage'
 import DatePickerDropdown from './DatePickerDropdown'
 import AllFCsDropdown from './AllFCsDropdown'
@@ -16,29 +15,27 @@ interface ToolbarRowProps {
 export default function ToolbarRow({ activeTab, onTabChange }: ToolbarRowProps) {
   return (
     <div className="flex items-center justify-between">
-      {/* Tab Group - TDS TabGroup (Type=Button Style, Style=Black, Size=Large) */}
-      <div className="flex gap-0">
-        <button
+      {/* TDS TabGroup - Button Style */}
+      <TabGroup orientation="horizontal" size="lg" tabType="button">
+        <TabCell
+          tabType="button"
+          tabStyle="black"
+          size="lg"
+          title="Performance"
+          isSelected={activeTab === 'performance'}
           onClick={() => onTabChange('performance')}
-          className={`px-5 py-2 font-sans text-[14px] leading-[20px] font-medium rounded-full transition-colors
-            ${activeTab === 'performance'
-              ? 'bg-[#0c0c0c] text-[#f2f2f2]'
-              : 'bg-transparent text-text-primary hover:bg-[#f7f7f7]'}`}
-        >
-          Performance
-        </button>
-        <button
+        />
+        <TabCell
+          tabType="button"
+          tabStyle="black"
+          size="lg"
+          title="Operations"
+          isSelected={activeTab === 'operations'}
           onClick={() => onTabChange('operations')}
-          className={`px-5 py-2 font-sans text-[14px] leading-[20px] font-medium rounded-full transition-colors
-            ${activeTab === 'operations'
-              ? 'bg-[#0c0c0c] text-[#f2f2f2]'
-              : 'bg-transparent text-text-primary hover:bg-[#f7f7f7]'}`}
-        >
-          Operations
-        </button>
-      </div>
+        />
+      </TabGroup>
 
-      {/* Badge Chips */}
+      {/* Filter Badges */}
       <div className="flex items-center gap-4">
         <DatePickerDropdown />
         <AllFCsDropdown />

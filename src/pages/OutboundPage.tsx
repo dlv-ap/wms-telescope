@@ -1,13 +1,14 @@
 import { useState } from 'react'
+import { TabGroup, TabCell, Badge, Button, Input } from '@delhivery/tarmac'
 
 type OrderStatus = 'all' | 'pending' | 'picked' | 'packed' | 'shipped' | 'cancelled'
 
-const statusColors: Record<string, string> = {
-  Pending: 'bg-[#fff6ea] text-[#cf9f02]',
-  Picked: 'bg-[#ecfdf5] text-[#059669]',
-  Packed: 'bg-[#eff4ff] text-[#5b80f7]',
-  Shipped: 'bg-[#ecfdf5] text-[#1ba86e]',
-  Cancelled: 'bg-[#fdf0f2] text-[#dc143c]',
+const statusBadgeVariant: Record<string, string> = {
+  Pending: 'warning',
+  Picked: 'success',
+  Packed: 'info',
+  Shipped: 'success',
+  Cancelled: 'error',
 }
 
 const orders = [
@@ -50,51 +51,61 @@ export default function OutboundPage() {
             Manage outbound orders, picking, packing and dispatch
           </p>
         </div>
-        <button className="h-12 px-5 bg-[#000000] text-white rounded-md flex items-center gap-2 font-sans text-[14px] font-medium cursor-pointer hover:bg-[#222] transition-colors">
-          <span className="material-icons-outlined text-[18px]">add</span>
+        <Button
+          variant="black"
+          buttonStyle="primary"
+          size="lg"
+          leadingIcon={<span className="material-icons-outlined text-[18px]">add</span>}
+        >
           Create Order
-        </button>
+        </Button>
       </div>
 
-      {/* Status Tabs */}
-      <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-[#e6e6e6]">
+      {/* TDS TabGroup for Status Tabs */}
+      <TabGroup orientation="horizontal" size="lg" tabType="button">
         {statusTabs.map(tab => (
-          <button
+          <TabCell
             key={tab.value}
+            tabType="button"
+            tabStyle="black"
+            size="lg"
+            title={tab.label}
+            isSelected={activeStatus === tab.value}
             onClick={() => setActiveStatus(tab.value)}
-            className={`px-4 py-2 rounded-md font-sans text-[13px] font-medium transition-colors flex items-center gap-2
-              ${activeStatus === tab.value
-                ? 'bg-[#111111] text-white'
-                : 'text-[#4b5563] hover:bg-[#f7f7f7]'}`}
-          >
-            {tab.label}
-            <span className={`text-[11px] px-1.5 py-0.5 rounded-full ${activeStatus === tab.value ? 'bg-white/20 text-white' : 'bg-[#f3f4f6] text-[#6b7280]'}`}>
-              {tab.count}
-            </span>
-          </button>
+            badge={<Badge variant={activeStatus === tab.value ? 'white' : 'coal'} size="sm" badgeType="subtle" text={String(tab.count)} />}
+          />
         ))}
-      </div>
+      </TabGroup>
 
       {/* Search + Filters */}
       <div className="flex items-center gap-3">
-        <div className="flex items-center h-10 px-3 gap-2 bg-white border border-[#e6e6e6] rounded-lg flex-1 max-w-[400px]">
-          <span className="material-icons-outlined text-[18px] text-[#9ca3af]">search</span>
-          <input
-            type="text"
+        <div className="flex-1 max-w-[400px]">
+          <Input
+            inputStyle="tarmac-01"
+            inputType="regular"
+            inputSize="md"
             placeholder="Search by Order ID or Customer..."
             value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="border-none outline-none bg-transparent font-sans text-[13px] text-[#111111] w-full placeholder:text-[#9ca3af]"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+            leadingIcon={<span className="material-icons-outlined text-[18px]">search</span>}
           />
         </div>
-        <button className="h-10 px-3 bg-white border border-[#e6e6e6] rounded-lg flex items-center gap-2 font-sans text-[13px] text-[#4b5563] hover:bg-[#f7f7f7] transition-colors">
-          <span className="material-icons-outlined text-[16px]">filter_list</span>
+        <Button
+          variant="black"
+          buttonStyle="secondary"
+          size="md"
+          leadingIcon={<span className="material-icons-outlined text-[16px]">filter_list</span>}
+        >
           Filters
-        </button>
-        <button className="h-10 px-3 bg-white border border-[#e6e6e6] rounded-lg flex items-center gap-2 font-sans text-[13px] text-[#4b5563] hover:bg-[#f7f7f7] transition-colors">
-          <span className="material-icons-outlined text-[16px]">download</span>
+        </Button>
+        <Button
+          variant="black"
+          buttonStyle="secondary"
+          size="md"
+          leadingIcon={<span className="material-icons-outlined text-[16px]">download</span>}
+        >
           Export
-        </button>
+        </Button>
       </div>
 
       {/* Orders Table */}
@@ -119,21 +130,17 @@ export default function OutboundPage() {
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#111111]">{order.customer}</td>
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.items}</td>
                 <td className="px-4 py-4">
-                  <span className="px-2.5 py-0.5 bg-[#f7f7f7] rounded-[10px] font-sans text-[12px] leading-[16px] font-medium text-[#111111]">
-                    {order.facility}
-                  </span>
+                  <Badge variant="white" size="sm" badgeType="subtle" text={order.facility} />
                 </td>
                 <td className="px-4 py-4">
-                  <span className={`px-2.5 py-1 rounded-[10px] font-sans text-[12px] leading-[16px] font-medium ${statusColors[order.status]}`}>
-                    {order.status}
-                  </span>
+                  <Badge variant={statusBadgeVariant[order.status] as any} size="sm" badgeType="subtle" text={order.status} />
                 </td>
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.date}</td>
                 <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.sla}</td>
                 <td className="px-4 py-4">
-                  <button className="w-8 h-8 flex items-center justify-center rounded hover:bg-[#f3f4f6] transition-colors">
-                    <span className="material-icons-outlined text-[18px] text-[#6b7280]">more_vert</span>
-                  </button>
+                  <Button variant="black" buttonStyle="tertiary" size="sm" buttonType="iconButton">
+                    <span className="material-icons-outlined text-[18px]">more_vert</span>
+                  </Button>
                 </td>
               </tr>
             ))}

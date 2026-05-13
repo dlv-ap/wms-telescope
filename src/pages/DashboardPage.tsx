@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Divider } from '@delhivery/tarmac'
 import ToolbarRow from '../components/dashboard/ToolbarRow'
 import AIRecommendations from '../components/dashboard/AIRecommendations'
 import DeliveryPerformance from '../components/dashboard/DeliveryPerformance'
@@ -20,7 +21,7 @@ export default function DashboardPage() {
       </h1>
 
       <ToolbarRow activeTab={activeTab} onTabChange={setActiveTab} />
-      <div className="w-full h-px bg-[#e6e6e6]" />
+      <Divider />
 
       {activeTab === 'performance' ? (
         <>
