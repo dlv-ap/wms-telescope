@@ -114,6 +114,21 @@ declare module '@delhivery/tarmac' {
     [key: string]: any
   }>
 
+  export const Table: React.FC<{
+    columns?: any[]
+    dataSource?: any[]
+    rowKey?: string | ((record: any, index?: number) => string)
+    size?: string
+    bordered?: boolean
+    hoverable?: boolean
+    striped?: boolean
+    pagination?: any
+    scroll?: any
+    className?: string
+    onChange?: (pagination: any, filters: any, sorter: any, extra: any) => void
+    [key: string]: any
+  }>
+
   export const SideNavigation: React.FC<any> & {
     Cell: React.FC<any>
     TabCell: React.FC<any>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TabGroup, TabCell, Badge, Button, Input } from '@delhivery/tarmac'
+import { TabGroup, TabCell, Badge, Button, Input, Table } from '@delhivery/tarmac'
 
 type OrderStatus = 'all' | 'pending' | 'picked' | 'packed' | 'shipped' | 'cancelled'
 
@@ -12,14 +12,25 @@ const statusBadgeVariant: Record<string, string> = {
 }
 
 const orders = [
-  { id: 'ORD-2025-001', customer: 'Havells India', items: 12, facility: 'DELFC1', status: 'Pending', date: '12 May 2026', sla: '14 May 2026' },
-  { id: 'ORD-2025-002', customer: 'Voltas Ltd', items: 5, facility: 'AMDFC1', status: 'Picked', date: '12 May 2026', sla: '13 May 2026' },
-  { id: 'ORD-2025-003', customer: 'BharatPe', items: 200, facility: 'BLRFC1', status: 'Packed', date: '11 May 2026', sla: '13 May 2026' },
-  { id: 'ORD-2025-004', customer: 'Apple India', items: 3, facility: 'AMDFC2', status: 'Shipped', date: '10 May 2026', sla: '12 May 2026' },
-  { id: 'ORD-2025-005', customer: 'Havells India', items: 45, facility: 'DELFC1', status: 'Pending', date: '12 May 2026', sla: '15 May 2026' },
-  { id: 'ORD-2025-006', customer: 'Voltas Ltd', items: 8, facility: 'AMDFC4', status: 'Cancelled', date: '09 May 2026', sla: '11 May 2026' },
-  { id: 'ORD-2025-007', customer: 'BharatPe', items: 150, facility: 'BLRFC1', status: 'Picked', date: '11 May 2026', sla: '14 May 2026' },
-  { id: 'ORD-2025-008', customer: 'Apple India', items: 1, facility: 'DELFC1', status: 'Packed', date: '12 May 2026', sla: '13 May 2026' },
+  { key: '1', id: 'ORD-2025-001', customer: 'Havells India', items: 12, facility: 'DELFC1', status: 'Pending', date: '12 May 2026', sla: '14 May 2026' },
+  { key: '2', id: 'ORD-2025-002', customer: 'Voltas Ltd', items: 5, facility: 'AMDFC1', status: 'Picked', date: '12 May 2026', sla: '13 May 2026' },
+  { key: '3', id: 'ORD-2025-003', customer: 'BharatPe', items: 200, facility: 'BLRFC1', status: 'Packed', date: '11 May 2026', sla: '13 May 2026' },
+  { key: '4', id: 'ORD-2025-004', customer: 'Apple India', items: 3, facility: 'AMDFC2', status: 'Shipped', date: '10 May 2026', sla: '12 May 2026' },
+  { key: '5', id: 'ORD-2025-005', customer: 'Havells India', items: 45, facility: 'DELFC1', status: 'Pending', date: '12 May 2026', sla: '15 May 2026' },
+  { key: '6', id: 'ORD-2025-006', customer: 'Voltas Ltd', items: 8, facility: 'AMDFC4', status: 'Cancelled', date: '09 May 2026', sla: '11 May 2026' },
+  { key: '7', id: 'ORD-2025-007', customer: 'BharatPe', items: 150, facility: 'BLRFC1', status: 'Picked', date: '11 May 2026', sla: '14 May 2026' },
+  { key: '8', id: 'ORD-2025-008', customer: 'Apple India', items: 1, facility: 'DELFC1', status: 'Packed', date: '12 May 2026', sla: '13 May 2026' },
+]
+
+const columns = [
+  { title: 'Order ID', dataIndex: 'id', key: 'id', render: (text: string) => <span className="font-semibold text-[#5b80f7]">{text}</span> },
+  { title: 'Customer', dataIndex: 'customer', key: 'customer' },
+  { title: 'Items', dataIndex: 'items', key: 'items' },
+  { title: 'Facility', dataIndex: 'facility', key: 'facility', render: (text: string) => <Badge variant="white" size="sm" badgeType="subtle" text={text} /> },
+  { title: 'Status', dataIndex: 'status', key: 'status', render: (text: string) => <Badge variant={statusBadgeVariant[text] as any} size="sm" badgeType="subtle" text={text} /> },
+  { title: 'Order Date', dataIndex: 'date', key: 'date' },
+  { title: 'SLA Date', dataIndex: 'sla', key: 'sla' },
+  { title: 'Actions', key: 'actions', render: () => <Button variant="black" buttonStyle="tertiary" size="sm" buttonType="iconButton"><span className="material-icons-outlined text-[18px]">more_vert</span></Button> },
 ]
 
 const statusTabs: { label: string; value: OrderStatus; count: number }[] = [
@@ -54,25 +65,33 @@ export default function OutboundPage() {
         <Button
           variant="black"
           buttonStyle="primary"
-          size="lg"
+          size="md"
           leadingIcon={<span className="material-icons-outlined text-[18px]">add</span>}
         >
           Create Order
         </Button>
       </div>
 
-      {/* TDS TabGroup for Status Tabs */}
-      <TabGroup orientation="horizontal" size="lg" tabType="button">
+      {/* TDS TabGroup for Status Tabs - size sm */}
+      <TabGroup orientation="horizontal" size="sm" tabType="button">
         {statusTabs.map(tab => (
           <TabCell
             key={tab.value}
             tabType="button"
             tabStyle="black"
-            size="lg"
+            size="sm"
             title={tab.label}
             isSelected={activeStatus === tab.value}
             onClick={() => setActiveStatus(tab.value)}
-            badge={<Badge variant={activeStatus === tab.value ? 'white' : 'coal'} size="sm" badgeType="subtle" text={String(tab.count)} />}
+            badge={
+              <Badge
+                variant={activeStatus === tab.value ? 'white' : 'black'}
+                size="sm"
+                badgeType="solid"
+                text={String(tab.count)}
+                className="ml-1 align-middle"
+              />
+            }
           />
         ))}
       </TabGroup>
@@ -93,7 +112,7 @@ export default function OutboundPage() {
         <Button
           variant="black"
           buttonStyle="secondary"
-          size="md"
+          size="sm"
           leadingIcon={<span className="material-icons-outlined text-[16px]">filter_list</span>}
         >
           Filters
@@ -101,52 +120,22 @@ export default function OutboundPage() {
         <Button
           variant="black"
           buttonStyle="secondary"
-          size="md"
+          size="sm"
           leadingIcon={<span className="material-icons-outlined text-[16px]">download</span>}
         >
           Export
         </Button>
       </div>
 
-      {/* Orders Table */}
-      <div className="bg-white rounded-lg border border-[#e2e2e5] overflow-hidden shadow-sm">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-[#f5f6f8]">
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Order ID</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Customer</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Items</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Facility</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Status</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Order Date</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">SLA Date</th>
-              <th className="text-left px-4 py-3 font-sans text-[12px] leading-[16px] font-medium text-[#111111] uppercase tracking-[0.6px]">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((order, i) => (
-              <tr key={i} className="border-t border-[#e0e2ea] hover:bg-[#f9fafb] transition-colors">
-                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-semibold text-[#5b80f7]">{order.id}</td>
-                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#111111]">{order.customer}</td>
-                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.items}</td>
-                <td className="px-4 py-4">
-                  <Badge variant="white" size="sm" badgeType="subtle" text={order.facility} />
-                </td>
-                <td className="px-4 py-4">
-                  <Badge variant={statusBadgeVariant[order.status] as any} size="sm" badgeType="subtle" text={order.status} />
-                </td>
-                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.date}</td>
-                <td className="px-4 py-4 font-sans text-[14px] leading-[20px] font-normal text-[#666666]">{order.sla}</td>
-                <td className="px-4 py-4">
-                  <Button variant="black" buttonStyle="tertiary" size="sm" buttonType="iconButton">
-                    <span className="material-icons-outlined text-[18px]">more_vert</span>
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* TDS Table */}
+      <Table
+        columns={columns as any}
+        dataSource={filtered}
+        size="medium"
+        bordered
+        hoverable
+        pagination={{ pageSize: 10, total: filtered.length }}
+      />
     </div>
   )
 }

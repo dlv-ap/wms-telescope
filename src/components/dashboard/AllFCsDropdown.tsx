@@ -51,7 +51,7 @@ export default function AllFCsDropdown() {
     <div className="relative" ref={ref}>
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center px-2.5 py-1.5 gap-1.5 bg-surface-white rounded border border-[#e6e6e6] cursor-pointer select-none hover:bg-[#f9f9f9] transition-colors"
+        className="flex items-center px-2.5 py-1.5 gap-1.5 bg-surface-white rounded border border-[#e6e6e6] cursor-pointer select-none hover:bg-[#f9f9f9] transition-colors whitespace-nowrap"
       >
         <span className="material-icons-outlined text-[16px] text-text-primary">widgets</span>
         <span className="font-sans text-[12px] leading-[16px] font-medium text-text-primary">{getLabel()}</span>

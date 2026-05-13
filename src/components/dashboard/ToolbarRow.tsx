@@ -16,11 +16,11 @@ export default function ToolbarRow({ activeTab, onTabChange }: ToolbarRowProps) 
   return (
     <div className="flex items-center justify-between">
       {/* TDS TabGroup - Button Style */}
-      <TabGroup orientation="horizontal" size="lg" tabType="button">
+      <TabGroup orientation="horizontal" size="sm" tabType="button">
         <TabCell
           tabType="button"
           tabStyle="black"
-          size="lg"
+          size="sm"
           title="Performance"
           isSelected={activeTab === 'performance'}
           onClick={() => onTabChange('performance')}
@@ -28,7 +28,7 @@ export default function ToolbarRow({ activeTab, onTabChange }: ToolbarRowProps) 
         <TabCell
           tabType="button"
           tabStyle="black"
-          size="lg"
+          size="sm"
           title="Operations"
           isSelected={activeTab === 'operations'}
           onClick={() => onTabChange('operations')}
@@ -36,7 +36,7 @@ export default function ToolbarRow({ activeTab, onTabChange }: ToolbarRowProps) 
       </TabGroup>
 
       {/* Filter Badges */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 shrink-0">
         <DatePickerDropdown />
         <AllFCsDropdown />
         <TransportationDropdown />
