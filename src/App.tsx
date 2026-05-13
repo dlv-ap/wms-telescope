@@ -3,6 +3,7 @@ import DashboardLayout from './layouts/DashboardLayout'
 import DashboardPage from './pages/DashboardPage'
 import InventoryPage from './pages/InventoryPage'
 import OutboundPage from './pages/OutboundPage'
+import ReportsPage from './pages/ReportsPage'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/outbound" element={<OutboundPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
         </Route>
       </Routes>
     </HashRouter>

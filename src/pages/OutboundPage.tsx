@@ -45,7 +45,7 @@ export default function OutboundPage() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
-          <h1 className="font-inter text-[20px] leading-[24px] font-bold text-[#1e222d]">Outbound</h1>
+          <h1 className="font-inter text-[20px] leading-[24px] font-bold text-[#1e222d]">Shipments</h1>
           <p className="font-inter text-[14px] leading-[24px] font-normal text-[#1e222d]">
             Manage outbound orders, picking, packing and dispatch
           </p>

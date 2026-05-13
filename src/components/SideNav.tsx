@@ -12,8 +12,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const navItems = [
   { icon: 'grid_view', label: 'Dashboard', path: '/' },
   { icon: 'warehouse', label: 'Inventory', path: '/inventory' },
-  { icon: 'local_shipping', label: 'Outbound', path: '/outbound' },
-  { icon: 'save_alt', label: 'Reports', path: '/' },
+  { icon: 'local_shipping', label: 'Shipments', path: '/outbound' },
+  { icon: 'save_alt', label: 'Reports', path: '/reports' },
   { icon: 'help_outline', label: 'Help', path: '/' },
 ]
 
