@@ -69,7 +69,7 @@ function SLACard({ items }: { items: { value: string; label: string; isRed: bool
             <span className={`font-sans text-[20px] leading-[26px] font-semibold ${item.isRed ? 'text-[#b71132]' : 'text-[#1f222e]'}`}>
               {item.value}
             </span>
-            <div className="flex items-start gap-1">
+            <div className="flex items-center gap-1">
               <span className="font-sans text-[12px] leading-[16px] font-semibold text-[#111111]">{item.label}</span>
               <InfoIcon tooltip={item.tooltip} />
             </div>
