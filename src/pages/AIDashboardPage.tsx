@@ -153,6 +153,20 @@ export default function AIDashboardPage() {
         <div className="px-3 py-2 border-t border-[#e6e6e6] shrink-0">
           <div className="flex items-center h-9 px-3 bg-[#f7f7f7] border border-[#e6e6e6] rounded-full gap-2">
             <input type="text" placeholder="Ask anything..." value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSend(input)} className="flex-1 border-none outline-none bg-transparent font-sans text-[11px] text-[#111] placeholder:text-[#9ca3af]" />
+            {/* Popular queries popover */}
+            <div className="relative group">
+              <button className="w-5 h-5 rounded-full bg-white border border-[#e6e6e6] flex items-center justify-center hover:bg-[#f3f4f6]">
+                <span className="material-icons-outlined text-[12px] text-[#6b7280]">lightbulb</span>
+              </button>
+              <div className="hidden group-hover:flex absolute bottom-7 right-0 w-[280px] bg-white border border-[#e6e6e6] rounded-lg shadow-lg p-2 flex-col gap-1 z-50">
+                <span className="font-sans text-[9px] text-[#9ca3af] uppercase font-semibold px-2 py-1">Suggested Queries</span>
+                {popularQueries.slice(0, 5).map((q, i) => (
+                  <button key={i} onClick={() => handleSend(q)} className="text-left px-2 py-1.5 rounded font-sans text-[10px] text-[#4b5563] hover:bg-[#f7f7f7] transition-colors leading-[14px]">
+                    {q}
+                  </button>
+                ))}
+              </div>
+            </div>
             <button onClick={() => handleSend(input)} className="w-5 h-5 rounded-full bg-[#1e222d] flex items-center justify-center">
               <span className="material-icons-outlined text-[12px] text-white">arrow_upward</span>
             </button>
