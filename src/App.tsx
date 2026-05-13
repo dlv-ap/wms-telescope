@@ -4,6 +4,7 @@ import DashboardPage from './pages/DashboardPage'
 import InventoryPage from './pages/InventoryPage'
 import OutboundPage from './pages/OutboundPage'
 import ReportsPage from './pages/ReportsPage'
+import AIDashboardPage from './pages/AIDashboardPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/outbound" element={<OutboundPage />} />
           <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/ai-dashboard" element={<AIDashboardPage />} />
         </Route>
       </Routes>
     </HashRouter>
